@@ -10,7 +10,7 @@ if (!isset($conn)) {
     <!-- Logo Section -->
     <div class="navbar-logo">
       <a href="index.php">
-        <img src="assets\logo\SpriteVerse logo - darkmode.svg" alt="SpriteVerse Logo" class="logo-img">
+        <img src="assets/logo/SpriteVerse logo - darkmode.svg" alt="SpriteVerse Logo" class="logo-img">
       </a>
     </div>
 

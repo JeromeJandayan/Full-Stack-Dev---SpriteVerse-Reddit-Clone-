@@ -60,6 +60,7 @@ if ($communityResult) {
     <title>SpriteVerse - Home</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/feed.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body <?php echo isLoggedIn() ? 'data-logged-in="true"' : 'data-logged-in="false"'; ?>>
     <?php include 'navbar.php'; ?>

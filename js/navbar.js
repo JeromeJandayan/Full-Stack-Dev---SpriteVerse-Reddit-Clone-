@@ -135,13 +135,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ========== Modal Functions (to be defined when modals are created) ==========
 function openCreatePostModal() {
-    // This will be implemented when we create the post modal
-    console.log('Open Create Post Modal');
-    alert('Create Post Modal - To be implemented');
+  const modal = document.getElementById('createPostModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function openCreateCommunityModal() {
-    // This will be implemented when we create the community modal
-    console.log('Open Create Community Modal');
-    alert('Create Community Modal - To be implemented');
+  const modal = document.getElementById('createCommunityModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 }

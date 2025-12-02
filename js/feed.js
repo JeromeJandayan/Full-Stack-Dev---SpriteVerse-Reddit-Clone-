@@ -228,10 +228,3 @@ function showNotification(message) {
         }, 300);
     }, 3000);
 }
-
-// Add to body dataset if user is logged in (PHP will set this)
-<?php if (isset($_SESSION['user_id'])): ?>
-document.body.dataset.loggedIn = 'true';
-<?php else: ?>
-document.body.dataset.loggedIn = 'false';
-<?php endif; ?>
