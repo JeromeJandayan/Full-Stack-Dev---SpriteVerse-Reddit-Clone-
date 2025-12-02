@@ -116,3 +116,20 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// ========== Modal Functions (to be defined when modals are created) ==========
+function openCreatePostModal() {
+  const modal = document.getElementById('createPostModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function openCreateCommunityModal() {
+  const modal = document.getElementById('createCommunityModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
