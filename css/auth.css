@@ -1,0 +1,418 @@
+/* auth.css - Authentication Page Styling (Neon Dark Mode) */
+
+.auth-container {
+    min-height: calc(100vh - var(--navbar-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(184, 79, 255, 0.1) 0%, transparent 50%),
+        var(--bg-primary);
+}
+
+.auth-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 50px rgba(0, 212, 255, 0.3);
+    border: 2px solid var(--neon-blue);
+}
+
+/* Left Side - Branding */
+.auth-branding {
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    padding: 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-branding::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+}
+
+.auth-branding::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: -50px;
+    right: -50px;
+}
+
+.branding-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.brand-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 16px;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+    to { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8); }
+}
+
+.brand-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 48px;
+    font-weight: 500;
+}
+
+.brand-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.feature-text {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Right Side - Forms */
+.auth-forms {
+    padding: 60px 40px;
+    position: relative;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-error {
+    background: rgba(255, 46, 151, 0.1);
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+}
+
+.alert-success {
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+}
+
+.alert-icon {
+    font-size: 20px;
+}
+
+.alert-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid var(--bg-hover);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 14px 24px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    color: var(--neon-blue);
+}
+
+.auth-tab.active {
+    color: var(--neon-blue);
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Form Container */
+.auth-form-container {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-form-container.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    font-size: 14px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.label-icon {
+    font-size: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--bg-primary);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
+.form-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.input-hint {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Password Input Wrapper */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper .form-input {
+    padding-right: 50px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--neon-blue);
+    transform: scale(1.1);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+    margin-top: 8px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Form Footer */
+.form-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--bg-hover);
+}
+
+.form-footer p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.form-footer a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.form-footer a:hover {
+    color: var(--neon-purple);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .auth-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-branding {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 24px 16px;
+    }
+    
+    .auth-forms {
+        padding: 40px 24px;
+    }
+    
+    .form-title {
+        font-size: 24px;
+    }
+    
+    .brand-features {
+        grid-template-columns: 1fr;
+    }
+}

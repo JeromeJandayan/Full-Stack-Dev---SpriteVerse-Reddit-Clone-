@@ -1,0 +1,319 @@
+/* communities.css - Communities Page Styling (Neon Dark Mode) */
+
+.communities-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+/* Header Section */
+.communities-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--neon-blue);
+}
+
+.header-content {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.create-community-btn {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  border: none;
+  border-radius: 24px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 46, 151, 0.3);
+}
+
+.create-community-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 46, 151, 0.5);
+}
+
+.btn-icon {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* Communities Grid */
+.communities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Community Card */
+.community-card {
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--neon-blue);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+}
+
+.community-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+  border-color: var(--neon-purple);
+}
+
+/* Community Icon */
+.community-card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.community-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon-placeholder-large {
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+/* Community Content */
+.community-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.community-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.community-card-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.community-card-title a:hover {
+  color: var(--neon-blue);
+}
+
+.community-card-description {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Community Stats */
+.community-card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.stat-icon {
+  font-size: 18px;
+}
+
+.stat-value {
+  color: var(--neon-blue);
+  font-weight: 700;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+/* Creator Info */
+.community-card-creator {
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding-top: 8px;
+  border-top: 1px solid var(--bg-hover);
+}
+
+.creator-name {
+  color: var(--neon-green);
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.community-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-join,
+.btn-joined,
+.btn-view {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-join {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-join:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+}
+
+.btn-joined {
+  background-color: var(--bg-primary);
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+}
+
+.btn-joined:hover {
+  background-color: var(--bg-hover);
+}
+
+.btn-view {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--neon-blue);
+}
+
+.btn-view:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--neon-purple);
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  background-color: var(--bg-secondary);
+  border: 2px dashed var(--neon-purple);
+  border-radius: 16px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+}
+
+.empty-state h3 {
+  font-size: 28px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.cta-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 24px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .communities-container {
+    padding: 24px 16px;
+  }
+
+  .communities-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .page-title {
+    font-size: 32px;
+  }
+
+  .create-community-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .communities-grid {
+    grid-template-columns: 1fr;
+  }
+}
