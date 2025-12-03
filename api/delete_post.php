@@ -24,7 +24,7 @@ if (!$post_id) {
 try {
     // Check if user owns the post or is admin/moderator of the community
     $stmt = $pdo->prepare("
-        SELECT p.user_id, p.community_id, p.image_path,
+        SELECT p.user_id, p.community_id, p.image_url,
                cm.role
         FROM posts p
         LEFT JOIN community_members cm ON cm.community_id = p.community_id 
@@ -54,8 +54,8 @@ try {
     $stmt->execute([$post_id]);
 
     // Delete image file if exists
-    if ($post['image_path'] && file_exists('../' . $post['image_path'])) {
-        unlink('../' . $post['image_path']);
+    if ($post['image_url'] && file_exists('../' . $post['image_url'])) {
+        unlink('../' . $post['image_url']);
     }
 
     echo json_encode(['success' => true, 'message' => 'Post deleted successfully']);

@@ -421,6 +421,120 @@ function showNotification(message) {
     }, 3000);
 }
 
+// ========== Edit Post Functions ==========
+
+function openEditPostModal() {
+  const modal = document.getElementById('editPostModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeEditPostModal() {
+  const modal = document.getElementById('editPostModal');
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+    
+    // Reset preview
+    removeEditImage();
+  }
+}
+
+function previewEditImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById('editImagePreview');
+  const previewImg = document.getElementById('previewEditImg');
+  const fileText = document.querySelector('.file-text-edit');
+  
+  if (file) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      previewImg.src = e.target.result;
+      preview.style.display = 'block';
+      fileText.textContent = file.name;
+    };
+    
+    reader.readAsDataURL(file);
+  }
+}
+
+function removeEditImage() {
+  const preview = document.getElementById('editImagePreview');
+  const previewImg = document.getElementById('previewEditImg');
+  const fileInput = document.getElementById('edit_post_image');
+  const fileText = document.querySelector('.file-text-edit');
+  
+  if (preview) preview.style.display = 'none';
+  if (previewImg) previewImg.src = '';
+  if (fileInput) fileInput.value = '';
+  if (fileText) fileText.textContent = 'Choose new image';
+}
+
+async function handleEditPost(event) {
+  event.preventDefault();
+  
+  const form = event.target;
+  const submitBtn = document.getElementById('editPostSubmitBtn');
+  const btnText = submitBtn.querySelector('.btn-text');
+  const btnLoading = submitBtn.querySelector('.btn-loading');
+  
+  // Get form data
+  const formData = new FormData(form);
+  
+  // Show loading state
+  submitBtn.disabled = true;
+  btnText.style.display = 'none';
+  btnLoading.style.display = 'flex';
+  
+  try {
+    const response = await fetch('api/edit_post.php', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      showNotification('Post updated successfully! Refreshing...');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      alert(data.message || 'Failed to update post');
+      submitBtn.disabled = false;
+      btnText.style.display = 'block';
+      btnLoading.style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Edit post error:', error);
+    alert('An error occurred. Please try again.');
+    submitBtn.disabled = false;
+    btnText.style.display = 'block';
+    btnLoading.style.display = 'none';
+  }
+}
+
+// Close modal on click outside
+document.addEventListener('DOMContentLoaded', function() {
+  const editModal = document.getElementById('editPostModal');
+  
+  editModal?.addEventListener('click', function(e) {
+    if (e.target === editModal) {
+      closeEditPostModal();
+    }
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && editModal?.classList.contains('show')) {
+      closeEditPostModal();
+    }
+  });
+});
+
 // Add animations
 const style = document.createElement('style');
 style.textContent = `

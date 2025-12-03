@@ -74,6 +74,8 @@ try {
   <title><?php echo htmlspecialchars($post['title']); ?> - SpriteVerse</title>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/feed.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body <?php echo isLoggedIn() ? 'data-logged-in="true"' : 'data-logged-in="false"'; ?>>
   <?php include 'navbar.php'; ?>
@@ -107,10 +109,16 @@ try {
           </div>
           
           <?php if ($isOwner): ?>
-            <button class="btn-delete-post" onclick="confirmDeletePost(<?php echo $post['id']; ?>)">
-              <span class="icon">🗑️</span>
-              <span>Delete Post</span>
-            </button>
+            <div class="post-owner-actions">
+              <button class="btn-edit-post" onclick="openEditPostModal()">
+                <span class="icon">✏️</span>
+                <span>Edit</span>
+              </button>
+              <button class="btn-delete-post" onclick="confirmDeletePost(<?php echo $post['id']; ?>)">
+                <span class="icon">🗑️</span>
+                <span>Delete</span>
+              </button>
+            </div>
           <?php endif; ?>
         </div>
 
@@ -232,8 +240,113 @@ try {
       </section>
     </div>
   </main>
+
+  <!-- Edit Post Modal -->
+  <?php if ($isOwner): ?>
+    <div class="modal-overlay" id="editPostModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 class="modal-title">✏️ Edit Post</h2>
+          <button class="modal-close" onclick="closeEditPostModal()">✕</button>
+        </div>
+        
+        <form id="editPostForm" onsubmit="handleEditPost(event)" enctype="multipart/form-data">
+          <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+          
+          <div class="modal-body">
+            <!-- Post Title -->
+            <div class="form-group">
+              <label for="edit_post_title" class="form-label">
+                <span class="label-icon">📌</span>
+                Post Title
+              </label>
+              <input 
+                type="text" 
+                id="edit_post_title" 
+                name="title" 
+                class="form-input" 
+                value="<?php echo htmlspecialchars($post['title']); ?>"
+                maxlength="255"
+                required
+              >
+            </div>
+
+            <!-- Post Content -->
+            <div class="form-group">
+              <label for="edit_post_content" class="form-label">
+                <span class="label-icon">✍️</span>
+                Content
+              </label>
+              <textarea 
+                id="edit_post_content" 
+                name="content" 
+                class="form-textarea" 
+                rows="6"
+              ><?php echo htmlspecialchars($post['content']); ?></textarea>
+            </div>
+
+            <!-- Current Image -->
+            <?php if ($post['image_url']): ?>
+            <div class="form-group">
+              <label class="form-label">Current Image</label>
+              <div class="current-image-preview">
+                <img src="<?php echo htmlspecialchars($post['image_url']); ?>" alt="Current image">
+              </div>
+            </div>
+            <?php endif; ?>
+
+            <!-- New Image Upload -->
+            <div class="form-group">
+              <label for="edit_post_image" class="form-label">
+                <span class="label-icon">🖼️</span>
+                Upload New Image (Optional)
+              </label>
+              <div class="file-input-wrapper">
+                <input 
+                  type="file" 
+                  id="edit_post_image" 
+                  name="image" 
+                  class="file-input" 
+                  accept="image/*"
+                  onchange="previewEditImage(event)"
+                >
+                <label for="edit_post_image" class="file-input-label">
+                  <span class="file-icon">📁</span>
+                  <span class="file-text-edit">Choose new image</span>
+                </label>
+              </div>
+              <div id="editImagePreview" class="image-preview" style="display: none;">
+                <img id="previewEditImg" src="" alt="Preview">
+                <button type="button" class="remove-image" onclick="removeEditImage()">✕ Remove</button>
+              </div>
+              <small class="input-hint">Leave empty to keep current image</small>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeEditPostModal()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary" id="editPostSubmitBtn">
+              <span class="btn-text">Save Changes</span>
+              <span class="btn-loading" style="display: none;">
+                <span class="spinner"></span> Saving...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <?php endif; ?>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/post.js"></script>
+  </body>
+  </html>
   
   <script src="js/navbar.js"></script>
   <script src="js/post.js"></script>
+  <script src="js/feed.js"></script>
+  <script src="js/modal.js"></script>
 </body>
 </html>

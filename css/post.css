@@ -604,3 +604,44 @@
     padding: 40px 20px;
     font-style: italic;
 }
+
+/* Post Owner Actions */
+.post-owner-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-edit-post {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 2px solid var(--neon-green);
+  border-radius: 8px;
+  color: var(--neon-green);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-edit-post:hover {
+  background-color: var(--neon-green);
+  color: var(--bg-primary);
+}
+
+/* Current Image Preview in Edit Modal */
+.current-image-preview {
+  margin-top: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--neon-blue);
+  max-width: 400px;
+}
+
+.current-image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

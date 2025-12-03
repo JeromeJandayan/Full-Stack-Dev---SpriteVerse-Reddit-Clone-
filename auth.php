@@ -29,7 +29,6 @@ if (isset($_GET['message'])) {
     <link rel="stylesheet" href="css/auth.css">
 </head>
 <body <?php echo isLoggedIn() ? 'data-logged-in="true"' : 'data-logged-in="false"'; ?>>
-    <?php include 'navbar.php'; ?>
     
     <main class="auth-container">
         <div class="auth-wrapper">

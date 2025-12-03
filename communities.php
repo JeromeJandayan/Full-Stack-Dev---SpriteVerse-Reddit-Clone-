@@ -157,6 +157,123 @@ if (isLoggedIn()) {
     </section>
   </main>
 
+  <!-- Create Post Modal -->
+  <div class="modal-overlay" id="createPostModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-title">📝 Create Post</h2>
+        <button class="modal-close" onclick="closeCreatePostModal()">✕</button>
+      </div>
+      
+      <form id="createPostForm" onsubmit="handleCreatePost(event)" enctype="multipart/form-data">
+        <div class="modal-body">
+          <!-- Community Selection -->
+          <div class="form-group">
+            <label for="post_community" class="form-label">
+              <span class="label-icon">👥</span>
+              Choose Community
+            </label>
+            <select id="post_community" name="community_id" class="form-input" required>
+              <option value="">Select a community...</option>
+              <?php
+              // Fetch communities where user is a member
+              if (isLoggedIn()) {
+                $userId = getCurrentUserId();
+                $commQuery = "SELECT DISTINCT c.id, c.name 
+                              FROM communities c
+                              INNER JOIN community_members cm ON c.id = cm.community_id
+                              WHERE cm.user_id = ?
+                              ORDER BY c.name";
+                $commStmt = $conn->prepare($commQuery);
+                $commStmt->bind_param("i", $userId);
+                $commStmt->execute();
+                $commResult = $commStmt->get_result();
+                
+                while ($community = $commResult->fetch_assoc()) {
+                  echo '<option value="' . $community['id'] . '">' . htmlspecialchars($community['name']) . '</option>';
+                }
+                $commStmt->close();
+              }
+              ?>
+            </select>
+            <small class="input-hint">You can only post in communities you've joined</small>
+          </div>
+
+          <!-- Post Title -->
+          <div class="form-group">
+            <label for="post_title" class="form-label">
+              <span class="label-icon">📌</span>
+              Post Title
+            </label>
+            <input 
+              type="text" 
+              id="post_title" 
+              name="title" 
+              class="form-input" 
+              placeholder="Enter an engaging title..."
+              maxlength="255"
+              required
+            >
+            <small class="input-hint">Max 255 characters</small>
+          </div>
+
+          <!-- Post Content -->
+          <div class="form-group">
+            <label for="post_content" class="form-label">
+              <span class="label-icon">✍️</span>
+              Content (Optional)
+            </label>
+            <textarea 
+              id="post_content" 
+              name="content" 
+              class="form-textarea" 
+              placeholder="Share your thoughts, ask a question, or start a discussion..."
+              rows="6"
+            ></textarea>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="form-group">
+            <label for="post_image" class="form-label">
+              <span class="label-icon">🖼️</span>
+              Upload Image (Optional)
+            </label>
+            <div class="file-input-wrapper">
+              <input 
+                type="file" 
+                id="post_image" 
+                name="image" 
+                class="file-input" 
+                accept="image/*"
+                onchange="previewImage(event)"
+              >
+              <label for="post_image" class="file-input-label">
+                <span class="file-icon">📁</span>
+                <span class="file-text">Choose an image</span>
+              </label>
+            </div>
+            <div id="imagePreview" class="image-preview" style="display: none;">
+              <img id="previewImg" src="" alt="Preview">
+              <button type="button" class="remove-image" onclick="removeImage()">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeCreatePostModal()">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary" id="createPostSubmitBtn">
+            <span class="btn-text">Create Post</span>
+            <span class="btn-loading" style="display: none;">
+              <span class="spinner"></span> Creating...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Create Community Modal -->
   <div class="modal-overlay" id="createCommunityModal">
     <div class="modal-container">
