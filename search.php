@@ -108,6 +108,7 @@ $totalResults = count($posts) + count($communities) + count($users);
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/feed.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body <?php echo isLoggedIn() ? 'data-logged-in="true"' : 'data-logged-in="false"'; ?>>
   <?php include 'navbar.php'; ?>
@@ -138,6 +139,25 @@ $totalResults = count($posts) + count($communities) + count($users);
         <p>Enter a search term to find posts, communities, and users</p>
       </div>
     <?php elseif ($totalResults === 0): ?>
+      <!-- Search Filters -->
+      <div class="search-filters">
+        <button class="filter-btn <?php echo $searchType === 'all' ? 'active' : ''; ?>" 
+                onclick="filterSearch('all')">
+          All (<?php echo $totalResults; ?>)
+        </button>
+        <button class="filter-btn <?php echo $searchType === 'posts' ? 'active' : ''; ?>" 
+                onclick="filterSearch('posts')">
+          Posts (<?php echo count($posts); ?>)
+        </button>
+        <button class="filter-btn <?php echo $searchType === 'communities' ? 'active' : ''; ?>" 
+                onclick="filterSearch('communities')">
+          Communities (<?php echo count($communities); ?>)
+        </button>
+        <button class="filter-btn <?php echo $searchType === 'users' ? 'active' : ''; ?>" 
+                onclick="filterSearch('users')">
+          Users (<?php echo count($users); ?>)
+        </button>
+      </div>
       <!-- No Results State -->
       <div class="no-results">
         <div class="empty-icon">😕</div>
