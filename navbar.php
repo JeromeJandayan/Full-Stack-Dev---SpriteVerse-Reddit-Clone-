@@ -83,10 +83,6 @@ if (!isset($conn)) {
               <i class="icon">👤</i>
               <span>Profile</span>
             </button>
-            <button class="dropdown-item" onclick="window.location.href='settings.php'">
-              <i class="icon">⚙️</i>
-              <span>Settings</span>
-            </button>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item logout-btn" onclick="window.location.href='api/logout.php'">
               <i class="icon">🚪</i>

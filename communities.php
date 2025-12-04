@@ -367,5 +367,6 @@ if (isLoggedIn()) {
   <script src="js/navbar.js"></script>
   <script src="js/modal.js"></script>
   <script src="js/communities.js"></script>
+  <script src="js/feed.js"></script>
 </body>
 </html>

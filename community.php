@@ -397,6 +397,96 @@ try {
       </form>
     </div>
   </div>
+
+  <!-- Create Community Modal -->
+    <div class="modal-overlay" id="createCommunityModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 class="modal-title">👥 Create Community</h2>
+          <button class="modal-close" onclick="closeCommunityModal()">✕</button>
+        </div>
+        
+        <form id="createCommunityForm" onsubmit="handleCreateCommunity(event)" enctype="multipart/form-data">
+          <div class="modal-body">
+            <!-- Community Name -->
+            <div class="form-group">
+              <label for="community_name" class="form-label">
+                <span class="label-icon">🏷️</span>
+                Community Name
+              </label>
+              <input 
+                type="text" 
+                id="community_name" 
+                name="name" 
+                class="form-input" 
+                placeholder="Enter community name..."
+                maxlength="100"
+                pattern="[a-zA-Z0-9 _-]+"
+                title="Only letters, numbers, spaces, hyphens, and underscores allowed"
+                required
+              >
+              <small class="input-hint">Max 100 characters. Only letters, numbers, spaces, hyphens, and underscores</small>
+            </div>
+
+            <!-- Community Description -->
+            <div class="form-group">
+              <label for="community_description" class="form-label">
+                <span class="label-icon">📄</span>
+                Description
+              </label>
+              <textarea 
+                id="community_description" 
+                name="description" 
+                class="form-textarea" 
+                placeholder="Describe what your community is about..."
+                rows="5"
+                required
+              ></textarea>
+              <small class="input-hint">Help others understand your community's purpose</small>
+            </div>
+
+            <!-- Community Icon -->
+            <div class="form-group">
+              <label for="community_icon" class="form-label">
+                <span class="label-icon">🎨</span>
+                Community Icon (Optional)
+              </label>
+              <div class="file-input-wrapper">
+                <input 
+                  type="file" 
+                  id="community_icon" 
+                  name="icon" 
+                  class="file-input" 
+                  accept="image/*"
+                  onchange="previewCommunityIcon(event)"
+                >
+                <label for="community_icon" class="file-input-label">
+                  <span class="file-icon">📁</span>
+                  <span class="file-text-community">Choose an icon</span>
+                </label>
+              </div>
+              <div id="communityIconPreview" class="image-preview" style="display: none;">
+                <img id="previewCommunityIcon" src="" alt="Preview">
+                <button type="button" class="remove-image" onclick="removeCommunityIcon()">✕ Remove</button>
+              </div>
+              <small class="input-hint">Recommended: Square image (e.g., 200x200px)</small>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeCommunityModal()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary" id="createCommunitySubmitBtn">
+              <span class="btn-text">Create Community</span>
+              <span class="btn-loading" style="display: none;">
+                <span class="spinner"></span> Creating...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   
   <script src="js/navbar.js"></script>
   <script src="js/feed.js"></script>

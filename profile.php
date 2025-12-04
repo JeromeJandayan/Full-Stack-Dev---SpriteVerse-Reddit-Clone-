@@ -322,6 +322,182 @@ $communityCount = count($userCommunities);
     </div>
   <?php endif; ?>
   
+  <!-- Create Post Modal -->
+  <div class="modal-overlay" id="createPostModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-title">📝 Create Post in c/<?php echo htmlspecialchars($community['name']); ?></h2>
+        <button class="modal-close" onclick="closeCreatePostModal()">✕</button>
+      </div>
+      
+      <form id="createPostForm" onsubmit="handleCreatePost(event)" enctype="multipart/form-data">
+        <input type="hidden" name="community_id" value="<?php echo $community['id']; ?>">
+        
+        <div class="modal-body">
+          <!-- Post Title -->
+          <div class="form-group">
+            <label for="post_title" class="form-label">
+              <span class="label-icon">📌</span>
+              Post Title
+            </label>
+            <input 
+              type="text" 
+              id="post_title" 
+              name="title" 
+              class="form-input" 
+              placeholder="Enter an engaging title..."
+              maxlength="255"
+              required
+            >
+          </div>
+
+          <!-- Post Content -->
+          <div class="form-group">
+            <label for="post_content" class="form-label">
+              <span class="label-icon">✍️</span>
+              Content (Optional)
+            </label>
+            <textarea 
+              id="post_content" 
+              name="content" 
+              class="form-textarea" 
+              placeholder="Share your thoughts..."
+              rows="6"
+            ></textarea>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="form-group">
+            <label for="post_image" class="form-label">
+              <span class="label-icon">🖼️</span>
+              Upload Image (Optional)
+            </label>
+            <div class="file-input-wrapper">
+              <input 
+                type="file" 
+                id="post_image" 
+                name="image" 
+                class="file-input" 
+                accept="image/*"
+                onchange="previewImage(event)"
+              >
+              <label for="post_image" class="file-input-label">
+                <span class="file-icon">📁</span>
+                <span class="file-text">Choose an image</span>
+              </label>
+            </div>
+            <div id="imagePreview" class="image-preview" style="display: none;">
+              <img id="previewImg" src="" alt="Preview">
+              <button type="button" class="remove-image" onclick="removeImage()">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeCreatePostModal()">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary" id="createPostSubmitBtn">
+            <span class="btn-text">Create Post</span>
+            <span class="btn-loading" style="display: none;">
+              <span class="spinner"></span> Creating...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Community Modal -->
+    <div class="modal-overlay" id="createCommunityModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 class="modal-title">👥 Create Community</h2>
+          <button class="modal-close" onclick="closeCommunityModal()">✕</button>
+        </div>
+        
+        <form id="createCommunityForm" onsubmit="handleCreateCommunity(event)" enctype="multipart/form-data">
+          <div class="modal-body">
+            <!-- Community Name -->
+            <div class="form-group">
+              <label for="community_name" class="form-label">
+                <span class="label-icon">🏷️</span>
+                Community Name
+              </label>
+              <input 
+                type="text" 
+                id="community_name" 
+                name="name" 
+                class="form-input" 
+                placeholder="Enter community name..."
+                maxlength="100"
+                pattern="[a-zA-Z0-9 _-]+"
+                title="Only letters, numbers, spaces, hyphens, and underscores allowed"
+                required
+              >
+              <small class="input-hint">Max 100 characters. Only letters, numbers, spaces, hyphens, and underscores</small>
+            </div>
+
+            <!-- Community Description -->
+            <div class="form-group">
+              <label for="community_description" class="form-label">
+                <span class="label-icon">📄</span>
+                Description
+              </label>
+              <textarea 
+                id="community_description" 
+                name="description" 
+                class="form-textarea" 
+                placeholder="Describe what your community is about..."
+                rows="5"
+                required
+              ></textarea>
+              <small class="input-hint">Help others understand your community's purpose</small>
+            </div>
+
+            <!-- Community Icon -->
+            <div class="form-group">
+              <label for="community_icon" class="form-label">
+                <span class="label-icon">🎨</span>
+                Community Icon (Optional)
+              </label>
+              <div class="file-input-wrapper">
+                <input 
+                  type="file" 
+                  id="community_icon" 
+                  name="icon" 
+                  class="file-input" 
+                  accept="image/*"
+                  onchange="previewCommunityIcon(event)"
+                >
+                <label for="community_icon" class="file-input-label">
+                  <span class="file-icon">📁</span>
+                  <span class="file-text-community">Choose an icon</span>
+                </label>
+              </div>
+              <div id="communityIconPreview" class="image-preview" style="display: none;">
+                <img id="previewCommunityIcon" src="" alt="Preview">
+                <button type="button" class="remove-image" onclick="removeCommunityIcon()">✕ Remove</button>
+              </div>
+              <small class="input-hint">Recommended: Square image (e.g., 200x200px)</small>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeCommunityModal()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary" id="createCommunitySubmitBtn">
+              <span class="btn-text">Create Community</span>
+              <span class="btn-loading" style="display: none;">
+                <span class="spinner"></span> Creating...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
   <script src="js/navbar.js"></script>
   <script src="js/modal.js"></script>
   <script src="js/profile.js"></script>
