@@ -13,7 +13,7 @@ async function joinCommunity(communityId, button) {
   if (button) {
     button.disabled = true;
     const originalHTML = button.innerHTML;
-    button.innerHTML = '<span class="spinner">Joining...</span>';
+    button.innerHTML = '<span class="spinner">⠋</span>';
   }
 
   try {
